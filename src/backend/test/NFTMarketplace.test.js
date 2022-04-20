@@ -46,4 +46,17 @@ describe('NFTMarketplace', function() {
             expect(await nft.tokenURI(2)).to.equal(URI)
         })
     })
+
+    describe('Making marketplace items', function () {
+        beforeEach(async function () {
+            //address 1 mints nft
+            awaitnft.connect(addr1),mint(URI)
+            //address 1 approves marketplace to spend nft
+            await nft.connect(addr1).setApprovalForAll(marketplace.address, true) 
+        })
+
+        it("Should track newly created item, transfer NFT from seller to marketplace and emit Offered event", async function () {
+            
+        })
+    })
 })
