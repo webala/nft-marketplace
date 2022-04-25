@@ -53,7 +53,7 @@ describe('NFTMarketplace', function() {
     describe('Making marketplace items', function () {
         beforeEach(async function () {
             //address 1 mints nft
-            awaitnft.connect(addr1).mint(URI)
+            await nft.connect(addr1).mint(URI)
             //address 1 approves marketplace to spend nft
             await nft.connect(addr1).setApprovalForAll(marketplace.address, true) 
         })
@@ -81,6 +81,12 @@ describe('NFTMarketplace', function() {
             expect(item.price).to.equal(toWei(1))
             expect(item.sold).to.equal(false)
 
+        })
+
+        it('Should fail if price is set to zero', async function() {
+            await expect(
+                marketplace.connect(addr1).makeItem(nft.address, 1, 0)
+            ).to.be.revertedWith('Price must be greater than zero');
         })
     })
 })

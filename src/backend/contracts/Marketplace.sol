@@ -19,11 +19,11 @@ contract MarketPlace is ReentrancyGuard {
         bool sold;
     }
 
-    event Offered (
-        uint itemId,
+    event Offered(
+        uint256 itemId,
         address indexed nft,
-        uint tokenId,
-        uint price,
+        uint256 tokenId,
+        uint256 price,
         address indexed seller
     );
 
@@ -44,6 +44,8 @@ contract MarketPlace is ReentrancyGuard {
 
         _nft.transferFrom(msg.sender, address(this), _tokenId);
 
+        itemCount++;
+        
         items[itemCount] = Item(
             itemCount,
             _nft,
